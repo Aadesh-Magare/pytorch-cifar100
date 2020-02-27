@@ -83,7 +83,6 @@ if __name__ == '__main__':
             if n > args.num_iter:
                 break
 
-            lr_scheduler.step()
 
             images = images.cuda()
             labels = labels.cuda()
@@ -96,6 +95,7 @@ if __name__ == '__main__':
                 break
             loss.backward()
             optimizer.step()
+            lr_scheduler.step()
 
             print('Iterations: {iter_num} [{trained_samples}/{total_samples}]\tLoss: {:0.4f}\tLR: {:0.8f}'.format(
                 loss.item(),
