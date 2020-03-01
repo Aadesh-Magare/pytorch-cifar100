@@ -60,10 +60,10 @@ def train(epoch):
         #update training loss for each iteration
 #         writer.add_scalar('Train/loss', loss.item(), n_iter)
 
-    for name, param in net.named_parameters():
-        layer, attr = os.path.splitext(name)
-        attr = attr[1:]
-#         writer.add_histogram("{}/{}".format(layer, attr), param, epoch)
+#     for name, param in net.named_parameters():
+#         layer, attr = os.path.splitext(name)
+#         attr = attr[1:]
+# #         writer.add_histogram("{}/{}".format(layer, attr), param, epoch)
 
 def eval_training(epoch):
     net.eval()
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     parser.add_argument('-net', type=str, required=True, help='net type')
     parser.add_argument('-gpu', type=bool, default=True, help='use gpu or not')
     parser.add_argument('-w', type=int, default=2, help='number of workers for dataloader')
-    parser.add_argument('-b', type=int, default=512, help='batch size for dataloader')
+    parser.add_argument('-b', type=int, default=128, help='batch size for dataloader')
     parser.add_argument('-s', type=bool, default=True, help='whether shuffle the dataset')
     parser.add_argument('-warm', type=int, default=1, help='warm up training phase')
     parser.add_argument('-lr', type=float, default=0.1, help='initial learning rate')
@@ -135,11 +135,11 @@ if __name__ == '__main__':
     checkpoint_path = os.path.join(settings.CHECKPOINT_PATH, args.net, settings.TIME_NOW)
 
     #use tensorboard
-    if not os.path.exists(settings.LOG_DIR):
-        os.mkdir(settings.LOG_DIR)
-#     writer = SummaryWriter(log_dir=os.path.join(
-#             settings.LOG_DIR, args.net, settings.TIME_NOW))
-    input_tensor = torch.Tensor(12, 3, 32, 32).cuda()
+#     if not os.path.exists(settings.LOG_DIR):
+#         os.mkdir(settings.LOG_DIR)
+# #     writer = SummaryWriter(log_dir=os.path.join(
+# #             settings.LOG_DIR, args.net, settings.TIME_NOW))
+#     input_tensor = torch.Tensor(12, 3, 32, 32).cuda()
 #     writer.add_graph(net, Variable(input_tensor, requires_grad=True))
 
     #create checkpoint folder to save model
